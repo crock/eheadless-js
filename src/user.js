@@ -2,12 +2,12 @@ import API, { JSONHTTPError } from "micro-api-client";
 import Admin from "./admin";
 
 const ExpiryMargin = 60 * 1000;
-const storageKey = "gotrue.user";
+const storageKey = "eheadless.user";
 const refreshPromises = {};
 let currentUser = null;
 const forbiddenUpdateAttributes = { api: 1, token: 1, audience: 1, url: 1 };
 const forbiddenSaveAttributes = { api: 1 };
-const isBrowser = () => typeof(window) !== "undefined";
+const isBrowser = () => typeof window !== "undefined";
 
 export default class User {
   constructor(api, tokenResponse, audience) {
@@ -39,7 +39,9 @@ export default class User {
         const api = apiInstance || new API(url, {});
         return new User(api, token, audience)._saveUserData(data, true);
       } catch (ex) {
-        console.error(new Error(`Gotrue-js: Error recovering session: ${ex}`));
+        console.error(
+          new Error(`eHeadless-js: Error recovering session: ${ex}`)
+        );
         return null;
       }
     }
@@ -147,12 +149,20 @@ export default class User {
 
   _processTokenResponse(tokenResponse) {
     this.token = tokenResponse;
-    let claims
+    let claims;
     try {
-      claims = JSON.parse(urlBase64Decode(tokenResponse.access_token.split(".")[1]));
+      claims = JSON.parse(
+        urlBase64Decode(tokenResponse.access_token.split(".")[1])
+      );
       this.token.expires_at = claims.exp * 1000;
     } catch (e) {
-      console.error(new Error(`Gotrue-js: Failed to parse tokenResponse claims: ${JSON.stringify(tokenResponse)}`))
+      console.error(
+        new Error(
+          `Gotrue-js: Failed to parse tokenResponse claims: ${JSON.stringify(
+            tokenResponse
+          )}`
+        )
+      );
     }
   }
 
@@ -176,7 +186,8 @@ export default class User {
   }
 
   _saveSession() {
-    isBrowser() && localStorage.setItem(storageKey, JSON.stringify(this._details));
+    isBrowser() &&
+      localStorage.setItem(storageKey, JSON.stringify(this._details));
     return this;
   }
 
@@ -191,22 +202,23 @@ export default class User {
   }
 }
 
-function urlBase64Decode(str) { // From https://jwt.io/js/jwt.js
-  var output = str.replace(/-/g, '+').replace(/_/g, '/');
+function urlBase64Decode(str) {
+  // From https://jwt.io/js/jwt.js
+  var output = str.replace(/-/g, "+").replace(/_/g, "/");
   switch (output.length % 4) {
     case 0:
       break;
     case 2:
-      output += '==';
+      output += "==";
       break;
     case 3:
-      output += '=';
+      output += "=";
       break;
     default:
-      throw 'Illegal base64url string!';
+      throw "Illegal base64url string!";
   }
   var result = window.atob(output); //polifyll https://github.com/davidchambers/Base64.js
-  try{
+  try {
     return decodeURIComponent(escape(result));
   } catch (err) {
     return result;

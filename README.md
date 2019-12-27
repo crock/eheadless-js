@@ -1,29 +1,24 @@
-# gotrue-js library
+# eheadless-js library
 
-[![Build Status](https://travis-ci.org/netlify/gotrue-js.svg?branch=master)](https://travis-ci.org/netlify/gotrue-js)
-
-This is a JavaScript client library for the [GoTrue](https://github.com/netlify/gotrue) API.
+This is a JavaScript client library for the eHeadless API.
 
 It lets you create and authenticate users and is a building block for constructing
 the UI for signups, password recovery, login and logout.
 
-Play around the methods via the [demo site](https://gotruejs-playground.netlify.com/).
-
 ## Installation
 
 ```
-yarn add gotrue-js
+yarn add eheadless-js
 ```
 
 ## Usage
 
 ```js
-import GoTrue from "gotrue-js";
+import eHJS from "eheadless-js";
 
-// Instantiate the GoTrue auth client with an optional configuration
+// Instantiate the eHeadless auth client with an optional configuration
 
-auth = new GoTrue({
-  APIUrl: "https://<your domain name>/.netlify/identity",
+auth = new eHJS({
   audience: "",
   setCookie: false
 });

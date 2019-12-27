@@ -1,9 +1,8 @@
 {
-  "name": "gotrue-js",
-  "description": "GoTrue API client for JavaScript",
-  "version": "0.9.24",
-  "author": "Mathias Biilmann Christensen",
-  "bugs": "https://github.com/netlify/micro-api-client-lib/issues",
+  "name": "eheadless-js",
+  "description": "eHeadless API client for JavaScript",
+  "version": "0.0.1",
+  "author": "Alex Crocker and Mathias Biilmann Christensen",
   "dependencies": {
     "micro-api-client": "^3.2.1"
   },
@@ -22,7 +21,7 @@
     "prettier": "^1.10.1",
     "uglify-js": "^2.6.2"
   },
-  "homepage": "https://github.com/netlify/gotrue-js",
+  "homepage": "https://github.com/domaincord/eheadless-js",
   "keywords": [
     "api",
     "gotrue",
@@ -34,15 +33,15 @@
   "types": "index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/netlify/gotrue-js.git"
+    "url": "git+https://github.com/domaincord/eheadless-js.git"
   },
   "scripts": {
-    "babelify": "browserify src/index.js -t [ babelify --presets [ env ] --plugins syntax-object-rest-spread,transform-object-rest-spread ] | uglifyjs > browser/gotrue.js",
+    "babelify": "browserify src/index.js -t [ babelify --presets [ env ] --plugins syntax-object-rest-spread,transform-object-rest-spread ] | uglifyjs > browser/ehjs.js",
     "compile": "babel src -d lib",
     "format": "eslint . --fix && prettier --write 'src/**/*.js'",
     "prepublish": "npm run compile",
     "prettier-preview": "prettier --list-different 'src/**/*.js'",
     "test": "eslint .",
-    "version": "npm run babelify && git add browser/gotrue.js"
+    "version": "npm run babelify && git add browser/ehjs.js"
   }
 }

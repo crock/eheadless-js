@@ -2,9 +2,9 @@ import API, { JSONHTTPError } from "micro-api-client";
 import User from "./user";
 
 const HTTPRegexp = /^http:\/\//;
-const defaultApiURL = `/.netlify/identity`;
+const defaultApiURL = `https://api.eheadless.com`;
 
-export default class GoTrue {
+export default class eHJS {
   constructor({
     APIUrl = defaultApiURL,
     audience = "",
@@ -12,7 +12,7 @@ export default class GoTrue {
   } = {}) {
     if (APIUrl.match(HTTPRegexp)) {
       console.warn(
-        "Warning:\n\nDO NOT USE HTTP IN PRODUCTION FOR GOTRUE EVER!\nGoTrue REQUIRES HTTPS to work securely."
+        "Warning:\n\nDO NOT USE HTTP IN PRODUCTION FOR eHJS EVER!\neHJS REQUIRES HTTPS to work securely."
       );
     }
 
@@ -137,5 +137,5 @@ export default class GoTrue {
 }
 
 if (typeof window !== "undefined") {
-  window.GoTrue = GoTrue;
+  window.eHJS = eHJS;
 }
